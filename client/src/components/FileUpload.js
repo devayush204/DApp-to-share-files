@@ -16,8 +16,8 @@ const FileUpload = ({ contract, account, provider }) => {
           url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
           data: formData,
           headers: {
-            pinata_api_key: `Enter Your Key`,
-            pinata_secret_api_key: `Enter Your Secret Key`,
+            pinata_api_key: `39f758db11a95507d578`,
+            pinata_secret_api_key: `ebd83c3cc26c0b601bd680af6856fe8df55025fead3089cb52a868303c2c6abf`,
             "Content-Type": "multipart/form-data",
           },
         });
@@ -28,6 +28,7 @@ const FileUpload = ({ contract, account, provider }) => {
         setFile(null);
       } catch (e) {
         alert("Unable to upload image to Pinata");
+        console.log(e)
       }
     }
     alert("Successfully Image Uploaded");
