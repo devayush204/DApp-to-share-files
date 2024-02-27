@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .App {
   text-align: center;
 }
@@ -36,13 +40,7 @@
     transform: rotate(360deg);
   }
 }
-html {
-  height: 100%;
-}
 
-body {
-  margin: 0;
-}
 
 .bg {
   animation: slide 3s ease-in-out infinite alternate;
@@ -96,9 +94,7 @@ h1 {
   margin: 0;
   box-sizing: border-box;
 }
-body {
-  height: 900px;
-}
+
 header {
   text-align: center;
   width: 100%;
