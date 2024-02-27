@@ -1,10 +1,7 @@
-import Upload from "./artifacts/contracts/Upload.sol/Upload.json";
-import { useState, useEffect } from "react";
-import { ethers } from "ethers";
-import FileUpload from "./components/FileUpload";
-import Display from "./components/Display";
-import Modal from "./components/Modal";
 import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import LandingPage from "./pages/LandingPage";
 
 function App() {
   const [account, setAccount] = useState("");
@@ -45,33 +42,14 @@ function App() {
     provider && loadProvider();
   }, []);
   return (
-    <>
-      {!modalOpen && (
-        <button className="share" onClick={() => setModalOpen(true)}>
-          Share
-        </button>
-      )}
-      {modalOpen && (
-        <Modal setModalOpen={setModalOpen} contract={contract}></Modal>
-      )}
-
-      <div className="App">
-        <h1 style={{ color: "white" }}>File Sharing DApp</h1>
-        <div class="bg"></div>
-        <div class="bg bg2"></div>
-        <div class="bg bg3"></div>
-
-        <p style={{ color: "white" }}>
-          Account : {account ? account : "Not connected"}
-        </p>
-        <FileUpload
-          account={account}
-          provider={provider}
-          contract={contract}
-        ></FileUpload>
-        <Display contract={contract} account={account}></Display>
-      </div>
-    </>
+    <div>
+ <BrowserRouter>
+      <Routes>
+      <Route path="/landing" element={<LandingPage />} />
+          <Route path="/" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
+    </div>
   );
 }
 
