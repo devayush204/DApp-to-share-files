@@ -8,8 +8,8 @@
 }
 
 .image-list img {
-  width: 250px;
-  height: 350px;
+  width: 200px;
+  height: 150px;
 }
 .center {
   margin: 40px;
@@ -40,4 +40,9 @@
 
 input[type="text"]:focus {
   background-color: lightblue;
+}
+
+.hash-value{
+  width: 200px;
+  word-wrap: break-word;
 }

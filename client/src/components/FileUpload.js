@@ -4,6 +4,7 @@ import "./FileUpload.css";
 const FileUpload = ({ contract, account, provider }) => {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState("No image selected");
+  const [ipfsHash, setIpfsHash] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (file) {
@@ -16,14 +17,16 @@ const FileUpload = ({ contract, account, provider }) => {
           url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
           data: formData,
           headers: {
-            pinata_api_key: `c21026716b7afe89623a`,
-            pinata_secret_api_key: `
-            343068a133353152ed9f5c9391a14c18757092d12ff0c2fa9726461c6c6c4824`,
+            pinata_api_key: `04748f8663f3c02fa2c9`,
+            pinata_secret_api_key: `b55e8a4ef3ef7b9ed7fe484eddd3ac003ab2a4ce7ea6cd4bcc5603a90587092c`,
             "Content-Type": "multipart/form-data",
           },
         });
         const ImgHash = `https://gateway.pinata.cloud/ipfs/${resFile.data.IpfsHash}`;
         contract.add(account,ImgHash);
+        setIpfsHash(resFile.data.IpfsHash);
+        console.log(ImgHash)
+
         alert("Successfully Image Uploaded");
         setFileName("No image selected");
         setFile(null);
@@ -65,6 +68,11 @@ const FileUpload = ({ contract, account, provider }) => {
           Upload File
         </button>
       </form>
+      {ipfsHash && (
+        <div style={{marginTop:"50px"}}>
+          <p>IPFS Hash: {ipfsHash}</p>
+        </div>
+      )}
     </div>
   );
 };
