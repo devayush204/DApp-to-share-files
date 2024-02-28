@@ -7,8 +7,6 @@ import { ToastContainer } from 'react-toastify';
 import Role from "./pages/Role";
 
 function App() {
- 
-
   
   return (
     <div>

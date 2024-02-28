@@ -7,8 +7,8 @@ import {Hourglass} from "react-loader-spinner"
 const FileUpload = ({ contract, account, provider }) => {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState("No image selected");
+  const [loader, setloader] = useState(false)
   const [ipfsHash, setIpfsHash] = useState("");
-  const [loader, setloader] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (file) {
@@ -22,17 +22,16 @@ const FileUpload = ({ contract, account, provider }) => {
           url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
           data: formData,
           headers: {
-            pinata_api_key: `04748f8663f3c02fa2c9`,
-            pinata_secret_api_key: `b55e8a4ef3ef7b9ed7fe484eddd3ac003ab2a4ce7ea6cd4bcc5603a90587092c`,
+            pinata_api_key: `3744c745293a6e253fe9`,
+            pinata_secret_api_key: `
+            6bd9556240b89eabd083cd596e58d11865117c081ef54339c37b6ab951dbf3d0`,
             "Content-Type": "multipart/form-data",
           },
         });
         const ImgHash = `https://gateway.pinata.cloud/ipfs/${resFile.data.IpfsHash}`;
         contract.add(account,ImgHash);
         setIpfsHash(resFile.data.IpfsHash);
-        console.log(ImgHash)
-
-        alert("Successfully Image Uploaded");
+        toast.success("Successfully Image Uploaded")
         setFileName("No image selected");
         setFile(null);
       } catch (e) {
@@ -72,7 +71,7 @@ const FileUpload = ({ contract, account, provider }) => {
       </div>}
       <form className="form" onSubmit={handleSubmit}>
         <label htmlFor="file-upload" className="choose">
-          Choose Image
+          Choose file
         </label>
         <input
           disabled={!account}
@@ -89,7 +88,7 @@ const FileUpload = ({ contract, account, provider }) => {
       </form>
       {ipfsHash && (
         <div style={{marginTop:"50px"}}>
-          <p>IPFS Hash: {ipfsHash}</p>
+          <p style={{color:"white"}}>Hash: {ipfsHash}</p>
         </div>
       )}
     </div>

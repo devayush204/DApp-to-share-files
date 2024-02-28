@@ -7,6 +7,7 @@ import Upload from "../artifacts/contracts/Upload.sol/Upload.json"
 import FileUpload from "../components/FileUpload";
 import Display from "../components/Display";
 import Modal from "../components/Modal";
+import DocShareModal from '../components/DocShareModal';
 
 
 const Home = () => {
@@ -59,8 +60,13 @@ const Home = () => {
           Share
         </button>
       )}
+       {!modalOpen && (
+        <button className="share1" onClick={() => setModalOpen(true)}>
+          Share Document
+        </button>
+      )}
       {modalOpen && (
-        <Modal setModalOpen={setModalOpen} contract={contract}></Modal>
+        <DocShareModal setModalOpen={setModalOpen} contract={contract}></DocShareModal>
       )}
 
       <div className="App">

@@ -6,11 +6,36 @@
   margin: 10px;
 }
 .dispcont{
-  height: 400px;
-  width: 400px;
+  
+  
+}
+.copy-button{
+position: absolute;
+top: 5px;
+right: 5px;
+background-color: #000;
+color: white;
+border-radius: 15px;
+font-size: 14px;
+padding: 5px 10px;
+cursor: pointer;
+}
+.singleidcontainer{
+  position: relative;
+  background-color: #A5DD9B;
+  padding: 20px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  overflow: hidden;
 }
 .hash-value{
   width: 200px;
+  font-size: 12px;
   word-wrap: break-word;
   color: white;
   text-align: center;
@@ -18,14 +43,14 @@
 
 .image-list img {
   width: 200px;
-  height: 150px;
+  height: 200px;
+  object-fit: cover;
 }
 .center {
   margin: 40px;
 }
 
 .button {
-  
   background-color: #A5DD9B;
   border-radius: 15px;
   color: #000;
@@ -50,13 +75,4 @@
   border: none;
   border-radius: 15px;
   text-transform: capitalize;
-}
-
-input[type="text"]:focus {
-  background-color: lightblue;
-}
-
-.hash-value{
-  width: 200px;
-  word-wrap: break-word;
 }
