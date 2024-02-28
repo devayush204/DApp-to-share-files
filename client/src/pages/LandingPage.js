@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Landingpage.module.css";
+import {Link} from "react-router-dom"
 
 const LandingPage = () => {
   return (
@@ -15,7 +16,11 @@ const LandingPage = () => {
           <h3>Contact</h3>
         </div>
         <div>
-          <button className={styles.connect_button}>Start Sharing</button>
+          <button className={styles.connect_button}>
+          <Link to={"/role"}>
+          Start Sharing
+          </Link>
+          </button>
         </div>
       </div>
 
@@ -67,11 +72,11 @@ const LandingPage = () => {
       </div>
 
 
-    <div className={styles.container4}>
+    {/* <div className={styles.container4}>
     <div>
         <h1>how it works?</h1>
     </div>
-    </div>
+    </div> */}
 
     </div>
   );
