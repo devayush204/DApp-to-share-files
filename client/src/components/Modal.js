@@ -30,8 +30,8 @@ const Modal = ({ setModalOpen, contract }) => {
           <div className="body">
             <input
               type="text"
-              className="address"
-              placeholder="Enter Address"
+              className="address1"
+              placeholder="Enter Account Address"
             ></input>
           </div>
           <form id="myForm">

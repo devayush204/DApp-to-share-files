@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./Display.css";
 const Display = ({ contract, account }) => {
   const [data, setData] = useState("");
+  const [salt, setsalt] = useState("a6h2")
   const getdata = async () => {
     let dataArray;
     const Otheraddress = document.querySelector(".address").value;
@@ -9,6 +10,14 @@ const Display = ({ contract, account }) => {
       if (Otheraddress) {
         dataArray = await contract.display(Otheraddress);
         console.log(dataArray);
+      const generateHash = () => {
+          const timestamp = Date.now().toString();
+          const randomString = Math.random().toString(36).substring(2, 7);
+          const data = timestamp + randomString;
+          const hash = crypto.createHash('md5').update(data).digest('hex').substring(0, 10);
+          setsalt(hash);
+        }
+        generateHash()
       } else {
         dataArray = await contract.display(account);
       }
@@ -20,17 +29,19 @@ const Display = ({ contract, account }) => {
     if (!isEmpty) {
       const str = dataArray.toString();
       const str_array = str.split(",");
-      // console.log(str);
-      // console.log(str_array);
+      console.log("second",str_array);
       const images = str_array.map((item, i) => {
         return (
-          <a href={item} key={i} target="_blank">
+          <a href={item} className="dispcont" key={i} target="_blank">
             <img
               key={i}
-              src={`https://gateway.pinata.cloud/ipfs/${item.substring(6)}`}
+              src={item}
               alt="new"
               className="image-list"
-            ></img>
+            >
+              
+            </img>
+            <p className="hash-value">{item.split("s/")[1] + salt}</p>
           </a>
         );
       });
@@ -44,7 +55,7 @@ const Display = ({ contract, account }) => {
       <div className="image-list">{data}</div>
       <input
         type="text"
-        placeholder="Enter Address"
+        placeholder="Enter account Address"
         className="address"
       ></input>
       <button className="center button" onClick={getdata}>

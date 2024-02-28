@@ -1,13 +1,19 @@
 import { useState } from "react";
 import axios from "axios";
 import "./FileUpload.css";
+import {toast} from "react-toastify"
+import {Hourglass} from "react-loader-spinner"
+
 const FileUpload = ({ contract, account, provider }) => {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState("No image selected");
+  const [loader, setloader] = useState(false)
+  const [ipfsHash, setIpfsHash] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (file) {
       try {
+        setloader(true)
         const formData = new FormData();
         formData.append("file", file);
 
@@ -16,23 +22,26 @@ const FileUpload = ({ contract, account, provider }) => {
           url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
           data: formData,
           headers: {
-            pinata_api_key: `c21026716b7afe89623a`,
+            pinata_api_key: `4495fd1e808795bff3d3`,
             pinata_secret_api_key: `
-            343068a133353152ed9f5c9391a14c18757092d12ff0c2fa9726461c6c6c4824`,
+            e2e488ca0043f049c7c97ba8b2b0d2dbe85f7f36025ed2c4c6f47b66b4a9ab55`,
             "Content-Type": "multipart/form-data",
           },
         });
         const ImgHash = `https://gateway.pinata.cloud/ipfs/${resFile.data.IpfsHash}`;
         contract.add(account,ImgHash);
-        alert("Successfully Image Uploaded");
+        setIpfsHash(resFile.data.IpfsHash);
+        toast.success("Successfully Image Uploaded")
         setFileName("No image selected");
         setFile(null);
       } catch (e) {
-        alert("Unable to upload image to Pinata");
+        setloader(false)
+        toast.error("Some Unexpected error occurred")
         console.log(e)
       }
     }
-    alert("Successfully Image Uploaded");
+    toast.success("Successfully Image Uploaded")
+    setloader(false)
     setFileName("No image selected");
     setFile(null);
   };
@@ -49,6 +58,17 @@ const FileUpload = ({ contract, account, provider }) => {
   };
   return (
     <div className="top">
+    {loader && <div className='loader'>
+    <Hourglass
+  visible={true}
+  height="80"
+  width="80"
+  ariaLabel="hourglass-loading"
+  wrapperStyle={{}}
+  wrapperClass=""
+  colors={['#306cce', '#72a1ed']}
+  />
+      </div>}
       <form className="form" onSubmit={handleSubmit}>
         <label htmlFor="file-upload" className="choose">
           Choose Image
@@ -60,11 +80,17 @@ const FileUpload = ({ contract, account, provider }) => {
           name="data"
           onChange={retrieveFile}
         />
-        <span className="textArea">Image: {fileName}</span>
+        <span className="textArea">Image: {fileName}
+        </span>
         <button type="submit" className="upload" disabled={!file}>
           Upload File
         </button>
       </form>
+      {ipfsHash && (
+        <div style={{marginTop:"50px"}}>
+          <p>Hash: {ipfsHash}</p>
+        </div>
+      )}
     </div>
   );
 };
