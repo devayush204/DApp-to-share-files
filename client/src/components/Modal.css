@@ -10,13 +10,14 @@
 
 .modalContainer {
   width: 500px;
-  height: 200px;
-  border-radius: 12px;
+  height: 250px;
+  border-radius: 15px;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   display: flex;
   flex-direction: column;
-  padding: 25px;
+  gap: 20px;
+  padding: 40px;
 }
 
 .modalContainer {
@@ -61,9 +62,9 @@
   height: 35px;
   margin: 10px;
   border: none;
-  background-color: cornflowerblue;
+  background-color: green;
   color: white;
-  border-radius: 8px;
+  border-radius: 15px;
   font-size: 16px;
   cursor: pointer;
 }
@@ -71,14 +72,38 @@
 #cancelBtn {
   background-color: crimson;
 }
-.address {
+.address1 {
   display: block;
   margin: auto;
-  height: 30px;
+  height: 40px;
   width: 330px;
   text-align: center;
+  background-color: rgba(128, 128, 128, 0.242);
+  padding: 5px;
+  border-radius: 15px;
+  margin: 15px 0;
+  border: none;
+}
+#selectNumber {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  background-color: #f8f8f8;
+  color: #333;
+  margin: 10px 0;
 }
 
-input[type="text"]:focus {
-  background-color: lightblue;
+#selectNumber option {
+  padding: 10px;
+  background-color: #fff;
+  color: #333;
 }
+
+#selectNumber option:checked {
+  background-color: #007bff;
+  color: #fff;
+}
+
+

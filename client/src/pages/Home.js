@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
+
 import Upload from "../artifacts/contracts/Upload.sol/Upload.json"
 
 import FileUpload from "../components/FileUpload";
@@ -14,6 +15,7 @@ const Home = () => {
   const [contract, setContract] = useState(null);
   const [provider, setProvider] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
+  
 
 
   useEffect(() => {
@@ -39,7 +41,6 @@ const Home = () => {
           Upload.abi,
           signer
         );
-        //console.log(contract);
         setContract(contract);
         setProvider(provider);
       } else {
@@ -63,12 +64,13 @@ const Home = () => {
       )}
 
       <div className="App">
+      
         <h1 style={{ color: "white" }}>File Sharing DApp</h1>
-        <div class="bg"></div>
-        <div class="bg bg2"></div>
-        <div class="bg bg3"></div>
+        <div className="bg"></div>
+        <div className="bg bg2"></div>
+        <div className="bg bg3"></div>
 
-        <p style={{ color: "white" }}>
+        <p className="accdetails" style={{ color: "white" }}>
           Account : {account ? account : "Not connected"}
         </p>
         <FileUpload

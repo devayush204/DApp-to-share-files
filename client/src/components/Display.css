@@ -3,29 +3,43 @@
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 10px;
   grid-auto-rows: 350px;
-
   margin: 10px;
+}
+.dispcont{
+  height: 400px;
+  width: 400px;
+}
+.hash-value{
+  width: 200px;
+  word-wrap: break-word;
+  color: white;
+  text-align: center;
 }
 
 .image-list img {
   width: 200px;
+<<<<<<< HEAD
   height: 150px;
+=======
+  height: 200px;
+>>>>>>> 4823a14a2a015ef28cc869925cf7aaf18883f38e
 }
 .center {
   margin: 40px;
 }
 
 .button {
-  background-color: initial;
-  background-image: linear-gradient(-180deg, #009ffd, #2a2a72);
-  border-radius: 6px;
-  color: #ffffff;
-  padding: 5px 10px;
+  
+  background-color: #A5DD9B;
+  border-radius: 15px;
+  color: #000;
+  padding: 10px 30px;
   border: none;
   font-size: 16px;
   border-radius: 5px;
-  margin-right: 10px;
-  padding-bottom: 10px;
+  cursor: pointer;
+  font-weight: 600;
+ 
 }
 .button:hover {
   box-shadow: rgba(253, 76, 0, 0.5) 0 3px 8px;
@@ -34,10 +48,15 @@
   display: block;
   margin: auto;
   height: 30px;
-  width: 330px;
+  padding: 20px;
+  width: 350px;
   text-align: center;
+  border: none;
+  border-radius: 15px;
+  text-transform: capitalize;
 }
 
+<<<<<<< HEAD
 input[type="text"]:focus {
   background-color: lightblue;
 }
@@ -46,3 +65,5 @@ input[type="text"]:focus {
   width: 200px;
   word-wrap: break-word;
 }
+=======
+>>>>>>> 4823a14a2a015ef28cc869925cf7aaf18883f38e
