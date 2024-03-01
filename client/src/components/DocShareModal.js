@@ -1,10 +1,10 @@
 import React from 'react'
 import "./DocShareModal.css";
-const DocShareModal = ({ setModalOpen, contract }) => {
+const DocShareModal = ({ setdocmodal, contract }) => {
     const sharing = async () => {
         const address = document.querySelector(".address").value;
         await contract.allow(address);
-        setModalOpen(false);
+        setdocmodal(false);
       };
     return (
         <>
@@ -29,7 +29,7 @@ const DocShareModal = ({ setModalOpen, contract }) => {
                     <div className="footer">
                         <button
                             onClick={() => {
-                                setModalOpen(false);
+                                setdocmodal(false);
                             }}
                             id="cancelBtn"
                         >

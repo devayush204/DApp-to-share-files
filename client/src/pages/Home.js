@@ -16,6 +16,7 @@ const Home = () => {
   const [contract, setContract] = useState(null);
   const [provider, setProvider] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [docmodal, setdocmodal] = useState(false)
   
 
 
@@ -60,13 +61,16 @@ const Home = () => {
           Share
         </button>
       )}
-       {!modalOpen && (
-        <button className="share1" onClick={() => setModalOpen(true)}>
+       {!docmodal && (
+        <button className="share1" onClick={() => setdocmodal(true)}>
           Share Document
         </button>
       )}
-      {modalOpen && (
-        <DocShareModal setModalOpen={setModalOpen} contract={contract}></DocShareModal>
+      {docmodal && (
+        <DocShareModal setdocmodal={setdocmodal} contract={contract}></DocShareModal>
+      )}
+       {modalOpen && (
+        <Modal setModalOpen={setModalOpen} contract={contract}></Modal>
       )}
 
       <div className="App">
