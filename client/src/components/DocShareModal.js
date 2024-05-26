@@ -21,7 +21,7 @@ const DocShareModal = ({ setdocmodal, contract }) => {
                     <div className="body">
                         <input
                             type="text"
-                            className="address1"
+                            className="ad`dress1"
                             placeholder="Enter Document Hash"
                         ></input>
                     </div>
