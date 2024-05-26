@@ -3,12 +3,13 @@ import axios from "axios";
 import "./FileUpload.css";
 import {toast} from "react-toastify"
 import {Hourglass} from "react-loader-spinner"
-
+const key = "dkqlndkl35";
 const FileUpload = ({ contract, account, provider }) => {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState("No image selected");
   const [loader, setloader] = useState(false)
   const [ipfsHash, setIpfsHash] = useState("");
+  const [key, setkey] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (file) {
@@ -22,9 +23,9 @@ const FileUpload = ({ contract, account, provider }) => {
           url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
           data: formData,
           headers: {
-            pinata_api_key: `4f4f25c089e61ed8eea3`,
+            pinata_api_key: `aca3caa668751b2d095a`,
             pinata_secret_api_key: `
-            2e0ba0c0e9629c0e20bae9088c0435bd7d50dcbb6f1ab8f3ed9be0a6b6ecca2c`,
+            3ddd800eb1725013f9fd1e6e8628cea67a87a757bf00b1679aff66291c612c6c`,
             "Content-Type": "multipart/form-data",
           },
         });
@@ -86,9 +87,10 @@ const FileUpload = ({ contract, account, provider }) => {
           Upload File
         </button>
       </form>
-      {ipfsHash && (
+      {ipfsHash &&  (
         <div style={{marginTop:"50px"}}>
-          <p style={{color:"white"}}>Hash: {ipfsHash}</p>
+          <p style={{color:"white"}}>UserHash: {ipfsHash}</p>
+          <p style={{color:"white"}}> Clientkey :Cgi3X8aML9nRM4inDFBpVX84WuCgi3X8a</p>
         </div>
       )}
     </div>

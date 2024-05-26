@@ -7,7 +7,7 @@ const LandingPage = () => {
     <div className={styles.container}>
       <div className={styles.navbar}>
         <div>
-          <h5 className={styles.name}>Debug Crew</h5>
+          <h5 className={styles.name}>Byte Coders</h5>
         </div>
         <div className={styles.links}>
           <h3>About</h3>

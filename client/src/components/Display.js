@@ -40,7 +40,7 @@ const Display = ({ contract, account }) => {
       alert("You don't have access");
     }
 
-    const isEmpty = Object.keys(dataArray).length === 0;
+const isEmpty = Object.keys(dataArray).length === 0;
 
     if (!isEmpty) {
       const str = dataArray.toString();
@@ -52,6 +52,7 @@ const Display = ({ contract, account }) => {
          // Extract file name from the URL
       const fileName = item.split("/").pop();
       const hashValue = `${fileName}${updatedSalt}`;
+     
         return (
           <div className="singleidcontainer">
             <div>
@@ -66,7 +67,7 @@ const Display = ({ contract, account }) => {
             </div>
             <div>
             <p className="hash-value">{hashValue}</p>
-
+           
             </div>
             <button
               className="copy-button"
