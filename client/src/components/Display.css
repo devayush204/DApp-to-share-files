@@ -5,35 +5,33 @@
   grid-auto-rows: 350px;
   margin: 10px;
 }
-.dispcont{
-  
-  
+
+.copy-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: #000;
+  color: white;
+  border-radius: 15px;
+  font-size: 14px;
+  padding: 5px 10px;
+  cursor: pointer;
 }
-.copy-button{
-position: absolute;
-top: 5px;
-right: 5px;
-background-color: #000;
-color: white;
-border-radius: 15px;
-font-size: 14px;
-padding: 5px 10px;
-cursor: pointer;
-}
-.singleidcontainer{
+
+.singleidcontainer {
   position: relative;
   background-color: #A5DD9B;
   padding: 20px;
   border-radius: 20px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 20px;
-  flex-wrap: wrap;
   overflow: hidden;
 }
-.hash-value{
+
+.hash-value {
   width: 200px;
   font-size: 12px;
   word-wrap: break-word;
@@ -41,11 +39,12 @@ cursor: pointer;
   text-align: center;
 }
 
-.image-list img {
+.file-preview {
   width: 200px;
   height: 200px;
   object-fit: cover;
 }
+
 .center {
   margin: 40px;
 }
@@ -57,14 +56,14 @@ cursor: pointer;
   padding: 10px 30px;
   border: none;
   font-size: 16px;
-  border-radius: 5px;
   cursor: pointer;
   font-weight: 600;
- 
 }
+
 .button:hover {
   box-shadow: rgba(253, 76, 0, 0.5) 0 3px 8px;
 }
+
 .address {
   display: block;
   margin: auto;
@@ -75,4 +74,17 @@ cursor: pointer;
   border: none;
   border-radius: 15px;
   text-transform: capitalize;
+}
+
+.pdf-preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+}
+
+.file-icon {
+  width: 64px;
+  height: 64px;
 }

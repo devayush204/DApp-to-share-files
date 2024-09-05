@@ -140,8 +140,6 @@ p {
 .share {
   cursor: pointer;
   margin-top: 20px;
-  margin-left: 20px;
-  vertical-align: center;
   background: #EE4266;
   width: 120px;
   height: 45px;
@@ -152,28 +150,36 @@ p {
   font-size: 14px;
   text-transform: capitalize;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  z-index: -1;
-}
-.share1{
-  cursor: pointer;
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  vertical-align: center;
-  background: #EE4266;
-  width: 120px;
-  height: 45px;
-  color: white;
-  border: none;
-  border-radius: 15px;
-  font-weight: 800;
-  font-size: 14px;
-  text-transform: capitalize;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  z-index: 1;
 }
 
-.share:hover {
-  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
-    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+.share1 {
+  cursor: pointer;
+  margin-top: 20px;
+  background: #EE4266;
+  width: 120px;
+  height: 45px;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  font-weight: 800;
+  font-size: 14px;
+  text-transform: capitalize;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.navHome {
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+  background-color: #333;
+}
+
+.pointsDiv {
+  color: white;
+  font-size: 16px;
+  background-color: #444;
+  padding: 10px;
+  border-radius: 4px;
 }

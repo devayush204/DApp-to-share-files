@@ -7,7 +7,7 @@ const LandingPage = () => {
     <div className={styles.container}>
       <div className={styles.navbar}>
         <div>
-          <h5 className={styles.name}>Debug Crew</h5>
+          <h5 className={styles.name}>Crypto Crafters</h5>
         </div>
         <div className={styles.links}>
           <h3>About</h3>
@@ -17,7 +17,7 @@ const LandingPage = () => {
         </div>
         <div>
           <button className={styles.connect_button}>
-          <Link to={"/role"}>
+          <Link to={"/dashboard"}>
           Start Sharing
           </Link>
           </button>
@@ -29,8 +29,9 @@ const LandingPage = () => {
           <div>
             <p className={styles.text}>To Share ,Upload and Secure Documents</p>
             <p className={styles.text2}>
-              E-Vault &nbsp; App <br />
-              on &nbsp; the &nbsp; go
+            Data &nbsp; independent <br />
+            Platform
+                
             </p>
           </div>
           <div className={styles.btnContainer}>

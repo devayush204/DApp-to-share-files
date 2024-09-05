@@ -1,24 +1,19 @@
-import React from 'react'
+import React from "react";
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
-
-import Upload from "../artifacts/contracts/Upload.sol/Upload.json"
-
+import Upload from "../artifacts/contracts/Upload.sol/Upload.json";
 import FileUpload from "../components/FileUpload";
 import Display from "../components/Display";
 import Modal from "../components/Modal";
-import DocShareModal from '../components/DocShareModal';
-
+import DocShareModal from "../components/DocShareModal";
 
 const Home = () => {
-
-    const [account, setAccount] = useState("");
+  const [account, setAccount] = useState("");
   const [contract, setContract] = useState(null);
   const [provider, setProvider] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
-  const [docmodal, setdocmodal] = useState(false)
-  
-
+  const [docmodal, setdocmodal] = useState(false);
+  const [points, setPoints] = useState(0);
 
   useEffect(() => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -50,32 +45,46 @@ const Home = () => {
       }
     };
     provider && loadProvider();
+
+    // Load points from local storage
   }, []);
 
+  useEffect(() => {
+    const storedPoints = localStorage.getItem("points");
+    if (storedPoints) {
+      setPoints(storedPoints);
+    }
+    // console.log(points);
+  }, [points]);
+
+  const handlePointsEarned = (newPoints) => {
+    setPoints(newPoints);
+  };
 
   return (
     <div>
-      <>
-      {!modalOpen && (
+      <nav className="navHome">
         <button className="share" onClick={() => setModalOpen(true)}>
           Share
         </button>
-      )}
-       {!docmodal && (
         <button className="share1" onClick={() => setdocmodal(true)}>
           Share Document
         </button>
-      )}
+        <div className="pointsDiv">Points: {points}</div>
+      </nav>
       {docmodal && (
-        <DocShareModal setdocmodal={setdocmodal} contract={contract}></DocShareModal>
+        <DocShareModal
+          setdocmodal={setdocmodal}
+          contract={contract}
+        ></DocShareModal>
       )}
-       {modalOpen && (
+
+      {modalOpen && (
         <Modal setModalOpen={setModalOpen} contract={contract}></Modal>
       )}
 
       <div className="App">
-      
-        <h1 style={{ color: "white" }}>File Sharing DApp</h1>
+        <h1 style={{ color: "white" }}>Data independent Platform</h1>
         <div className="bg"></div>
         <div className="bg bg2"></div>
         <div className="bg bg3"></div>
@@ -87,12 +96,12 @@ const Home = () => {
           account={account}
           provider={provider}
           contract={contract}
+          onPointsEarned={handlePointsEarned}
         ></FileUpload>
         <Display contract={contract} account={account}></Display>
       </div>
-    </>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

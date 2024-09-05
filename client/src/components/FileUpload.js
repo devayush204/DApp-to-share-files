@@ -1,19 +1,28 @@
 import { useState } from "react";
 import axios from "axios";
 import "./FileUpload.css";
-import {toast} from "react-toastify"
-import {Hourglass} from "react-loader-spinner"
+import { toast } from "react-toastify";
+import { Hourglass } from "react-loader-spinner";
 
-const FileUpload = ({ contract, account, provider }) => {
+const FileUpload = ({ contract, account, provider, onPointsEarned  }) => {
   const [file, setFile] = useState(null);
-  const [fileName, setFileName] = useState("No image selected");
-  const [loader, setloader] = useState(false)
+  const [fileName, setFileName] = useState("No file selected");
+  const [loader, setLoader] = useState(false);
   const [ipfsHash, setIpfsHash] = useState("");
+
+  const getFileType = (file) => {
+    const extension = file.name.split('.').pop().toLowerCase();
+    if (['jpg', 'jpeg', 'png', 'gif'].includes(extension)) return 'image';
+    if (['mp4', 'webm', 'ogg'].includes(extension)) return 'video';
+    if (extension === 'pdf') return 'pdf';
+    return 'unknown';
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (file) {
       try {
-        setloader(true)
+        setLoader(true);
         const formData = new FormData();
         formData.append("file", file);
 
@@ -22,32 +31,39 @@ const FileUpload = ({ contract, account, provider }) => {
           url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
           data: formData,
           headers: {
-            pinata_api_key: `4f4f25c089e61ed8eea3`,
-            pinata_secret_api_key: `
-            2e0ba0c0e9629c0e20bae9088c0435bd7d50dcbb6f1ab8f3ed9be0a6b6ecca2c`,
+            pinata_api_key: `f09f0107f030d4d76c51`,
+            pinata_secret_api_key: `0c8cf7007580f84f512e18bc779fbaf35bfb9197cbd22309e905ae1272b7b67a`,
             "Content-Type": "multipart/form-data",
           },
         });
-        const ImgHash = `https://gateway.pinata.cloud/ipfs/${resFile.data.IpfsHash}`;
-        contract.add(account,ImgHash);
+
+        const fileType = getFileType(file);
+        const ImgHash = `https://gateway.pinata.cloud/ipfs/${resFile.data.IpfsHash}?type=${fileType}`;
+        await contract.add(account, ImgHash);
         setIpfsHash(resFile.data.IpfsHash);
-        toast.success("Successfully Image Uploaded")
-        setFileName("No image selected");
+        toast.success("File uploaded successfully");
+        setFileName("No file selected");
         setFile(null);
+
+        // Add points to local storage
+        const currentPoints = parseInt(localStorage.getItem('points') || '0');
+        const newPoints = currentPoints + 100;
+        localStorage.setItem('points', newPoints.toString());
+        
+        // Notify parent component about points change
+        onPointsEarned(newPoints);
+
       } catch (e) {
-        setloader(false)
-        toast.error("Some Unexpected error occurred")
-        console.log(e)
+        setLoader(false);
+        toast.error("An unexpected error occurred");
+        console.log(e);
       }
     }
-    toast.success("Successfully Image Uploaded")
-    setloader(false)
-    setFileName("No image selected");
-    setFile(null);
+    setLoader(false);
   };
+
   const retrieveFile = (e) => {
-    const data = e.target.files[0]; //files array of files object
-    // console.log(data);
+    const data = e.target.files[0];
     const reader = new window.FileReader();
     reader.readAsArrayBuffer(data);
     reader.onloadend = () => {
@@ -56,19 +72,22 @@ const FileUpload = ({ contract, account, provider }) => {
     setFileName(e.target.files[0].name);
     e.preventDefault();
   };
+
   return (
     <div className="top">
-    {loader && <div className='loader'>
-    <Hourglass
-  visible={true}
-  height="80"
-  width="80"
-  ariaLabel="hourglass-loading"
-  wrapperStyle={{}}
-  wrapperClass=""
-  colors={['#306cce', '#72a1ed']}
-  />
-      </div>}
+      {loader && (
+        <div className='loader'>
+          <Hourglass
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="hourglass-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            colors={['#306cce', '#72a1ed']}
+          />
+        </div>
+      )}
       <form className="form" onSubmit={handleSubmit}>
         <label htmlFor="file-upload" className="choose">
           Choose file
@@ -80,8 +99,7 @@ const FileUpload = ({ contract, account, provider }) => {
           name="data"
           onChange={retrieveFile}
         />
-        <span className="textArea">Image: {fileName}
-        </span>
+        <span className="textArea">File: {fileName}</span>
         <button type="submit" className="upload" disabled={!file}>
           Upload File
         </button>
@@ -94,90 +112,5 @@ const FileUpload = ({ contract, account, provider }) => {
     </div>
   );
 };
+
 export default FileUpload;
-
-// import { useState } from "react";
-// import axios from "axios";
-// import "./FileUpload.css";
-// function FileUpload({ contract, provider, account }) {
-//   // const [urlArr, setUrlArr] = useState([]);
-//   const [file, setFile] = useState(null);
-//   const [fileName, setFileName] = useState("No image selected");
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//       if (file) {
-//         try {
-//           const formData = new FormData();
-//           formData.append("file", file);
-
-//           const resFile = await axios({
-//             method: "post",
-//             url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
-//             data: formData,
-//             headers: {
-//               pinata_api_key: `95f328a012f1634eab8b`,
-//               pinata_secret_api_key: `8ea64e6b39c91631c66128a7c0e0dde35a6fbdf797a8393cc5ba8bf8d58e9b54`,
-//               "Content-Type": "multipart/form-data",
-//             },
-//           });
-
-//           const ImgHash = `ipfs://${resFile.data.IpfsHash}`;
-//           const signer = contract.connect(provider.getSigner());
-//           signer.add(account, ImgHash);
-
-//           //setUrlArr((prev) => [...prev, ImgHash]);
-
-//           //Take a look at your Pinata Pinned section, you will see a new file added to you list.
-//         } catch (error) {
-//           alert("Error sending File to IPFS");
-//           console.log(error);
-//         }
-//       }
-
-//       alert("Successfully Uploaded");
-//       setFileName("No image selected");
-//       setFile(null); //to again disable the upload button after upload
-//     } catch (error) {
-//       console.log(error.message); //this mostly occurse when net is not working
-//     }
-//   };
-//   const retrieveFile = (e) => {
-//     const data = e.target.files[0];
-//     console.log(data);
-
-//     const reader = new window.FileReader();
-
-//     reader.readAsArrayBuffer(data);
-//     reader.onloadend = () => {
-//       setFile(e.target.files[0]);
-//     };
-//     setFileName(e.target.files[0].name);
-//     e.preventDefault();
-//   };
-//   return (
-//     <div className="top">
-//       <form className="form" onSubmit={handleSubmit}>
-//         <label htmlFor="file-upload" className="choose">
-//           {/*turn around for avoding choose file */}
-//           Choose Image
-//         </label>
-//         <input
-//           disabled={!account} //disabling button when metamask account is not connected
-//           type="file"
-//           id="file-upload"
-//           name="data"
-//           onChange={retrieveFile}
-//         />
-//         <span className="textArea">Image: {fileName}</span>
-//         {/* choose file */}
-//         <button type="submit" disabled={!file} className="upload">
-//           Upload file
-//         </button>
-//       </form>
-//     </div>
-//   );
-// }
-
-// export default FileUpload;
